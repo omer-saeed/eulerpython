@@ -1,0 +1,33 @@
+from functools import reduce
+import utils
+import math
+
+__author__ = 'omer.saeed'
+
+primes = 0
+primesum = 0
+prime = 0
+currentPrime = 0
+while primes < 11:
+    prime = utils.nextPrime(currentPrime)
+    if prime > 10:
+        #Calculate truncations of a given number
+        allPrimes = True
+        nextPrimel = prime
+        nextPrimer = prime
+        for truncations in range (0, int(math.log10(prime))):
+            nextPrimel = int(nextPrimel / 10)
+            nextPrimer = int(nextPrimer % int(math.pow(10, int(math.log10(nextPrimer)))))
+            if utils.checkPrime(nextPrimel) == False or utils.checkPrime(nextPrimer) == False:
+                allPrimes = False
+                break
+
+        if allPrimes == True:
+            primes += 1
+            primesum += prime
+            print(prime)
+
+    currentPrime += 1
+
+print(primes)
+print(primesum)
